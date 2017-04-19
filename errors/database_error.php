@@ -1,8 +1,7 @@
 <?php
-include '../view/header.php';
-?>
+include($_SERVER['DOCUMENT_ROOT'].'/final_project/view/header.php');
+?> 
 <p> ERROR </p>
-
-<?php
-include '../view/footer.php';
-?>
+<!-- <?php
+include($_SERVER['DOCUMENT_ROOT'].'/final_project/view/footer.php');
+?> -->
