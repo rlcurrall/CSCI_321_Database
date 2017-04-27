@@ -252,6 +252,12 @@ function search_games($keyword)
 
 function join_game($gameID, $characterID)
 {
+    global $db;
+    
+    $query = "";
+    $statement = $db->prepare($query);
+    
+    $statement->execute();
     
 }
 

@@ -25,6 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `characters`
 --
+USE scroll_lock;
 
 CREATE TABLE `characters` (
   `characterID` int(11) NOT NULL,

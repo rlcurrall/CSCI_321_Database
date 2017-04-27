@@ -14,7 +14,7 @@ if ( $action == NULL )
     $action = filter_input(INPUT_GET, 'action');
     if ( $action == NULL )
     {
-        $action = 'user_menu';
+        $action = 'profile';
     } // end nested if
 } // end if
 
@@ -36,9 +36,9 @@ switch($action)
 {
     case 'login':
         $login_message = "";
-        $username = filter_input(INPUT_POST, 'username');
-        $password = filter_input(INPUT_POST, 'password');
-        if (is_valid_login($username, $password))
+        $_SESSION['username'] = filter_input(INPUT_POST, 'username');
+        $_SESSION['password'] = filter_input(INPUT_POST, 'password');
+        if (is_valid_login($_SESSION['username'], $_SESSION['password']))
         {
             $_SESSION['is_valid_login'] = true;
             include('view/user_menu.php');
@@ -49,12 +49,12 @@ switch($action)
         } // end if-else
         break;
     case 'verify_login':
-        $username = filter_input(INPUT_POST, 'username');
-        $password = filter_input(INPUT_POST, 'password');
-        if (is_valid_login($username, $password))
+        $_SESSION['username'] = filter_input(INPUT_POST, 'username');
+        $_SESSION['password'] = filter_input(INPUT_POST, 'password');
+        if (is_valid_login($_SESSION['username'], $_SESSION['password']))
         {
             $_SESSION['is_valid_login'] = true;
-            include('view/user_menu.php');
+            include('view/profile.php');
         }
         else
         {
@@ -68,8 +68,8 @@ switch($action)
         $login_message = 'You have been logged out.';
         include('view/login.php');
         break;
-    case 'user_menu':
-        include('view/user_menu.php');
+    case 'profile':
+        include('view/profile.php');
         break;
     case 'show_register_form':
         include('view/register.php');
@@ -84,4 +84,29 @@ switch($action)
         $lgoin_message = "Login using your new username and password.";
         include('view/login.php');
         break;
+    case 'search' :
+        // TODO 
+        break;
+    case 'view_characters' :
+        // TODO
+        break;
+    case 'add_character' :
+        // TODO
+        break;
+    case 'add_character_form':
+        // TODO
+        break;
+    case 'view_games' :
+        // TODO
+        break;
+    case 'join_game' :
+        // TODO
+        break;
+    case 'create_game' :
+        // TODO
+        break;
+    case 'create_game_form' :
+        // TODO
+        break;
+    
 }

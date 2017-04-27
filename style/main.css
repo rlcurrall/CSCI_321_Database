@@ -1,0 +1,159 @@
+/******************************************************************************/
+
+/******************************************************************************/
+
+html {
+    background-color: #e3dcc0;
+}
+body {
+    margin-top: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Eagle Lake', cursive;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #a70e0e;
+    margin-bottom: 0;
+}
+
+main {
+    margin: 0;
+    padding: 2em 1em;
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 6em;
+    text-align: right;
+    padding-right: 0.5em;
+}
+input {
+  display: inline-block;
+  float: left;
+}
+
+aside {
+    position: fixed;
+    width: 18rem;
+    height: 100%;
+    margin: 0;
+    color: white;
+    background-color: #000;
+}
+
+aside p {
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+
+aside p:hover {
+    background-color: #a70e0e;
+}
+
+aside h2 {
+    width: 100%;
+    text-align: center;
+}
+
+main {
+    margin-left: 18rem;
+}
+
+footer {
+    margin-left: 18rem;
+    padding: 2rem 1rem;
+}
+/******************************************************************************/
+/*                              ID Styles                                     */
+/******************************************************************************/
+
+profile-body {
+    margin: 0;
+    padding: 0;
+}
+#login-logo {
+    height: 6em;
+    display: inline-block;
+    margin: 1em 0.5em 1em 5em;
+    vertical-align: middle;
+}
+
+#login-title {
+    display: inline-block;
+    font-size: 4em;
+    vertical-align: middle;
+    font-family: 'Eagle Lake', cursive;
+}
+
+#logo {
+    height: 3em;
+    display: inline-block;
+    margin: 1em 0.5em 1em 5em;
+    vertical-align: middle;
+}
+
+#title {
+    display: inline-block;
+    font-size: 2em;
+    vertical-align: middle;
+    font-family: 'Eagle Lake', cursive;
+}
+
+#home-link, #home-link:hover {
+    text-decoration: none;
+}
+
+#form {
+    border: 0.1em solid #a70e0e;
+    border-radius: 1em;
+    margin: auto;
+    padding: 1em;
+    width: 20em;
+    background-color: #96804b; 
+    
+    line-height: 2em;
+}
+
+#button {
+    background-color: #a70e0e;
+    border: 0.1em solid #a70e0e;
+    border-radius: 10em;
+    text-align: center;
+    font-family: 'Eagle Lake', cursive;
+    padding: 0.5em 1em;
+    width: 45%;
+    /*
+    float: right;
+    margin: 0 auto;
+    */
+    display: inline-block;
+    margin: 0.4em auto;
+}
+#button:hover {
+    background-color: #e3dcc0;
+    border: 0.1em solid #a70e0e;
+    font-weight: 900;
+}
+
+#button-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-content: center;
+}
+
+#login:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/******************************************************************************/
+/*                             Responsive Styles                              */
+/******************************************************************************/
+
