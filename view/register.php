@@ -7,7 +7,11 @@
                 <input type="hidden" name="action" value="register">
                 
                 <label>Email:</label>
-                <input type="email" name="email" placeholder="email@domain.com"required autofocus>
+                <input type="email" name="email" placeholder="email@domain.com" required autofocus>
+                <br>
+                
+                <label>Name:</label>
+                <input type="text" name="name" placeholder="Your name">
                 <br>
                 
                 <label>Username:</label>

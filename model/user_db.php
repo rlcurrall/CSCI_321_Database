@@ -1,19 +1,20 @@
 <?php
 
 /////////////////////////// LOGIN FUNCTIONS ///////////////////////////
-function add_user($username, $password, $email)
+function add_user($username, $name, $password, $email)
 {
     global $db;
     // $new_password = sha1($username . $password);
     $query = 'INSERT INTO users
-              (username, email, password)
+              (username, name, email, password)
               VALUES
-              (:username, :email, :password)';
+              (:username, :name, :email, :password)';
     
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
     $statement->bindValue(':email', $email);
     $statement->bindValue(':password', $password);
+    $statement->bindValue(':name', $name);
     $statement->execute();
     $statement->closeCursor();
 } // end add_user function
@@ -89,12 +90,13 @@ function get_characters($userID)
 {
     global $db;
     
-    $query = 'SELECT characters.name, characters.image, games.name
+    $query = 'SELECT characters.characterID, characters.characterName, 
+        characters.background, games.gameName, games.gameID
               FROM characters
               LEFT OUTER JOIN games
               ON characters.gameID = games.gameID
               WHERE userID = :userID
-              ORDER BY characters.name';
+              ORDER BY characters.characterName';
     $statement = $db->prepare($query);
     $statement->bindValue(':userID', $userID);
     $statement->execute();
@@ -107,8 +109,8 @@ function get_character($characterID)
 {
     global $db;
     
-    $query = 'SELECT characters.name, characters.image, characters.background,
-                     games.name, games.gameID
+    $query = 'SELECT characters.characterID, characters.characterName, 
+        characters.background, games.gameName, games.gameID
               FROM characters
               LEFT JOIN games
               ON characters.gameID = games.gameID
@@ -121,35 +123,31 @@ function get_character($characterID)
     return $character;
 }
 
-function add_character($userID, $name, $image, $background)
+function add_character($userID, $name, $background)
 {
     global $db;
-    
     $query = 'INSERT INTO characters
-              ( userID, name, background )
+              ( userID, characterName, background )
               VALUES
-              ( :userID, :name, :background )';
+              ( :userID, :characterName, :background )';
     $statement = $db->prepare($query);
-    $statement->bindValue(':characterID', $userID);
-    $statement->bindValue(':name', $name);
-    $statement->bindValue(':image', $image);
+    $statement->bindValue(':userID', $userID);
+    $statement->bindValue(':characterName', $name);
     $statement->bindValue(':background', $background);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function edit_character($characterID, $name, $image, $background)
+function edit_character($characterID, $name, $background)
 {
     global $db;
-    
     $query = 'UPDATE characters
-              SET name = :name,
+              SET characterName = :name,
                   background = :background
               WHERE characterID = :characterID';
     $statement = $db->prepare($query);
     $statement->bindValue(':characterID', $characterID);
     $statement->bindValue(':name', $name);
-    $statement->bindValue(':image', $image);
     $statement->bindValue(':background', $background);
     $statement->execute();
     $statement->closeCursor();
@@ -159,12 +157,12 @@ function delete_character($characterID)
 {
     global $db;
     
-    $query = 'DELETE FROM character
+    $query = 'DELETE FROM characters
               WHERE characterID = :characterID';
     $statement = $db->prepare($query);
     $statement->bindValue(':characterID', $characterID);
     $statement->execute();
-    $statement-closeCursor();
+    $statement->closeCursor();
 }
 
 function search_character($keyword)
@@ -172,7 +170,7 @@ function search_character($keyword)
     global $db;
     
     $query = "SELECT * FROM characters
-              WHERE name LIKE CONCAT('%', :keyword, '%')";
+              WHERE characterName LIKE CONCAT('%', :keyword, '%')";
     
     $statement = $db->prepare($query);
     $statement->bindValue(':keyword', $keyword);
@@ -184,28 +182,21 @@ function search_character($keyword)
 
 /////////////////////////// GAME FUNCTIONS ///////////////////////////
 
+function num_games()
+{
+    global $db;
+    $query = 'SELECT COUNT(*) AS total
+              FROM games';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $numRows = fetch($statement);
+    $statement->closeCursor();
+    return $numRows;
+}
 function get_games($userID)
 {
     global $db;
-    
-    $query = 'SELECT games.name, games.adminID
-              FROM games
-              INNER JOIN characters
-              ON games.gameID = characters.gameID
-              WHERE userID = :userID';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':userID', $userID);
-    $statement->execute();
-    $games = $statement->fetchAll();
-    $statement->closeCursor();
-    return $games;
-}
-
-function get_admin_games($userID)
-{
-    global $db;
-    
-    $query = 'SELECT games.name
+    $query = 'SELECT games.gameName, games.description, games.gameID
               FROM games
               INNER JOIN users
               ON games.adminID = users.userID
@@ -213,9 +204,9 @@ function get_admin_games($userID)
     $statement = $db->prepare($query);
     $statement->bindValue(':userID', $userID);
     $statement->execute();
-    $admin_games = $statement->fetchAll();
+    $games = $statement->fetchAll();
     $statement->closeCursor();
-    return $admin_games;
+    return $games;
 }
 
 function get_game($gameID)
@@ -233,11 +224,72 @@ function get_game($gameID)
     return $game;
 }
 
+function all_games()
+{
+    global $db;
+    
+    $query = 'SELECT games.gameID, 
+                     games.gameName, 
+                     games.description, 
+                     users.username
+              FROM games
+              INNER JOIN users
+              ON games.adminID = users.userID';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $all_games = $statement->fetchAll();
+    $statement->closeCursor();
+    return $all_games;
+}
+
+function add_game($userID, $name, $description)
+{
+    global $db;
+    $query = 'INSERT INTO games
+              ( adminID, gameName, description )
+              VALUES
+              ( :userID, :gameName, :description )';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':userID', $userID);
+    $statement->bindValue(':gameName', $name);
+    $statement->bindValue(':description', $description);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function delete_game($gameID)
+{
+    global $db;
+    
+    $query = 'DELETE FROM games
+              WHERE gameID = :gameID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':gameID', $gameID);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function edit_game($gameID, $name, $description)
+{
+    global $db;
+    $query = 'UPDATE `games` 
+                    SET 
+                        `gameName` = :name,
+                        `description` = :description
+                    WHERE gameID = :gameID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':gameID', $gameID);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':description', $description);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
 function search_games($keyword)
 {
     global $db;
     
-    $query = "SELECT games.name 
+    $query = "SELECT games.gameName 
               FROM games
               INNER JOIN users
               ON games.adminID = users.userID
@@ -254,11 +306,13 @@ function join_game($gameID, $characterID)
 {
     global $db;
     
-    $query = "";
+    $query = "UPDATE characters
+                SET gameID = :gameID
+                WHERE characterID = :characterID";
     $statement = $db->prepare($query);
-    
+    $statement->bindValue(':gameID', $gameID);
+    $statement->bindValue(':characterID', $characterID);
     $statement->execute();
-    
 }
 
 ?>

@@ -26,14 +26,19 @@
                     <input type="password" name="password" placeholder="Password" required>
                     <br>
                 
-                    <span id="button-wrapper"><input id="button" align="right" type="submit" value="Login"></span>
+                    <span id="button-wrapper"><input id="button" 
+                        style="width: 45%;" align="right" 
+                        type="submit" value="Login"></span>
                 </form>
             
                 <form action="." method="post">
                     <input type="hidden" name="action" value="show_register_form">
-                    <span id="button-wrapper"><input id="button" type="submit" value="Register"></span>
+                    <span id="button-wrapper"><input id="button" 
+                        style="width: 45%;" type="submit" value="Register"></span>
                 </form>
             </div>
         </main>
 
-<?php include('view/footer.php'); ?>
+<?php include('view/footer.php'); 
+    $login_message = "";
+?>
