@@ -2,7 +2,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     
-    $dsn = 'mysql:host=localhost;dbname=scroll_lock';
+    $dsn = 'mysql:host=localhost;dbname=rcurrall';
     $usernameDB = 'mgs_user';
     $passwordDB = 'pa55word';
     // added to...
