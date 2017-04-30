@@ -3,19 +3,19 @@
     $user = get_user($_SESSION['username']);
     $characters = get_characters($user['userID']);
 ?>
-<div id="profile-body">
+<div class="profile-body">
     <aside>
         <h2><?php echo $user['name']; ?></h2>
         <form action="." method="post">
             <input type="hidden" name="action" value="view_characters">
-            <input type="submit" id="aside_button" value="Characters">
+            <input type="submit" class="aside_button" value="Characters">
         </form>
         <form action="." method="post">
             <input type="hidden" name="action" value="view_games">
-            <input type="submit" id="aside_button" value="Games">
+            <input type="submit" class="aside_button" value="Games">
         </form>
     </aside>
-    <main id="profile-main">
+    <main class="profile-main">
         <h1>Characters</h1>
         <table>
             <tr>
@@ -45,7 +45,7 @@
                         <input type="hidden" name="action" value="join_game_form">
                         <input type="hidden" name="character_id"
                                value="<?php echo $character['characterID']; ?>">
-                        <input type="submit" value="Join Game" id="button">
+                        <input type="submit" value="Join Game" class="button">
                     </form>
                     <?php
                     }
@@ -57,25 +57,25 @@
                            value="delete_character">
                     <input type="hidden" name="character_id"
                            value="<?php echo $character['characterID']; ?>">
-                    <input type="submit" id="button" value="Delete">
+                    <input type="submit" class="button" value="Delete">
                 </form></td>
                 <td><form action="." method="post">
                     <input type="hidden" name="action"
                            value="edit_character_form">
                     <input type="hidden" name="character_id"
                            value="<?php echo $character['characterID']; ?>">
-                    <input type="submit" id="button" value="Edit">
+                    <input type="submit" class="button" value="Edit">
                 </form></td>
             </tr>
             <?php endforeach;
             }
             ?>
             <tr>
-                <td id="addChar" colspan="4" style="border: none;">
+                <td class="addChar" colspan="4" style="border: none;">
                     <form action="." method="post">
                         <input type="hidden" name="action" value="add_character_form">
                         <input type="hidden" name="user_id" value="<?php echo $user['userID'] ?>">
-                        <input id="button" type="submit" value="Add Character">
+                        <input class="button" type="submit" value="Add Character">
                     </form>
                 </td>
             </tr>

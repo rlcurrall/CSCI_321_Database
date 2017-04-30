@@ -224,6 +224,38 @@ function get_game($gameID)
     return $game;
 }
 
+function get_players($gameID)
+{
+    global $db;
+    $query = 'SELECT characters.characterID, 
+                     characters.characterName, 
+                     users.username
+                FROM characters
+                INNER JOIN users
+                ON characters.userID = users.userID
+                WHERE gameID = :gameID';
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue('gameID', $gameID);
+    $statement->execute();
+    $players = $statement->fetchAll();
+    $statement->closeCursor();
+    return $players;
+}
+
+function remove_player($characterID)
+{
+    global $db;
+    $query = 'UPDATE characters 
+                SET gameID = NULL
+                WHERE characterID = :characterID';
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':characterID', $characterID);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
 function all_games()
 {
     global $db;

@@ -3,19 +3,19 @@
     $user = get_user($_SESSION['username']);
     $games = get_games($user['userID']);
 ?>
-<div id="profile-body">
+<div class="profile-body">
     <aside>
         <h2><?php echo $user['name']; ?></h2>
         <form action="." method="post">
             <input type="hidden" name="action" value="view_characters">
-            <input type="submit" id="aside_button" value="Characters">
+            <input type="submit" class="aside_button" value="Characters">
         </form>
         <form action="." method="post">
             <input type="hidden" name="action" value="view_games">
-            <input type="submit" id="aside_button" value="Games">
+            <input type="submit" class="aside_button" value="Games">
         </form>
     </aside>
-    <main id="profile-main">
+    <main class="profile-main">
         <h1>Games</h1>
         <table>
             <tr>
@@ -41,7 +41,7 @@
                                value='game_page'>
                         <input type='hidden' name='game_id'
                                value='<?php echo $game['gameID']; ?>'>
-                        <input class="button" type="submit" value="<?php echo $game['gameName']; ?>">
+                        <input class="gameLink" type="submit" value="<?php echo $game['gameName']; ?>">
                     </form>
                 </td>
                 <td><?php echo $game['description']; ?></td>
@@ -51,14 +51,14 @@
                            value="delete_game">
                     <input type="hidden" name="game_id"
                            value="<?php echo $game['gameID']; ?>">
-                    <input type="submit" id="button" value="Delete">
+                    <input type="submit" class="button" value="Delete">
                 </form></td>
                 <td><form action="." method="post">
                     <input type="hidden" name="action"
                            value="edit_game_form">
                     <input type="hidden" name="game_id"
                            value="<?php echo $game['gameID']; ?>">
-                    <input type="submit" id="button" value="Edit">
+                    <input type="submit" class="button" value="Edit">
                 </form></td>
                 
             </tr>
@@ -66,11 +66,11 @@
             }
             ?>
             <tr>
-                <td id="addChar" colspan="4" style="border: none;">
+                <td class="addChar" colspan="4" style="border: none;">
                     <form action="." method="post">
                         <input type="hidden" name="action" value="add_game_form">
                         <input type="hidden" name="user_id" value="<?php echo $user['userID'] ?>">
-                        <input id="button" type="submit" value="Add game">
+                        <input class="button" type="submit" value="Add game">
                     </form>
                 </td>
             </tr>

@@ -1,5 +1,5 @@
 /******************************************************************************/
-
+/*                              Type Selectors                                */
 /******************************************************************************/
 * {
     font-family: Arial, Helvetica, sans-serif;
@@ -16,14 +16,6 @@ body {
     padding: 0;
 }
 
-h1 {
-    font-family: 'Eagle Lake', cursive;
-}
-
-h2 {
-    font-family: 'Eagle Lake', cursive;
-}
-
 header {
     background-color: #a70e0e;
     margin: 0;
@@ -34,31 +26,17 @@ header {
     top: 0;
 }
 
-#login-header {
-    background-color: #a70e0e;
-    position: initial;
-    margin-bottom: 0;
-    height: auto;
-}
-
 main {
     margin: 0;
     padding: 2em 1em;
 }
 
-label{
-    display: inline-block;
-    float: left;
-    clear: left;
-    width: 6em;
-    text-align: right;
-    padding-right: 0.5em;
-}
-input {
-  display: inline-block;
-  float: left;
+footer {
+    margin-left: 18rem;
+    padding: 2rem 1rem;
 }
 
+/* Aside Styles */
 aside {
     position: fixed;
     width: 18rem;
@@ -78,38 +56,41 @@ aside p:hover {
     background-color: #a70e0e;
 }
 
-#menu_link {
-    color: white;
-    padding: 0.5rem 0;
-    text-align: center;
-    text-decoration: none;
-}
-
-#menu_link:hover {
-    color: white;
-    text-decoration: none;
-}
-
 aside h2 {
     width: 100%;
     text-align: center;
     margin: 1em 0;
 }
+/********************************/
 
-#profile-main {
-    margin-left: 18rem;
-    margin-top: 2.5em;
+/* Title Styles */
+
+h1 {
+    font-family: 'Eagle Lake', cursive;
 }
 
-#profile-main h1 {
-    margin: 1em 1em;
+h2 {
+    font-family: 'Eagle Lake', cursive;
 }
+/********************************/
 
-footer {
-    margin-left: 18rem;
-    padding: 2rem 1rem;
+/* Form Styles */
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 6em;
+    text-align: right;
+    padding-right: 0.5em;
 }
+input {
+  display: inline-block;
+  float: left;
+}
+/********************************/
 
+/* Table Styles */
 table {
     width: 90%;
     margin: 0 auto;
@@ -125,55 +106,38 @@ td {
     border: 1px solid black;
 }
 
-#addChar {
-    margin: 1em 0;
-    padding: 0;
-}
-
 textarea {
     display: block;
 }
+/********************************/
+
 /******************************************************************************/
-/*                              ID Styles                                     */
+/*                             Class Styles                                   */
 /******************************************************************************/
 
-#profile-body {
-    margin: 0;
-    padding: 0;
-}
-#login-logo {
+/* Login Styles */
+.login-logo {
     height: 6em;
     display: inline-block;
     margin: 1em 0.5em 1em 5em;
     vertical-align: middle;
 }
 
-#login-title {
+.login-title {
     display: inline-block;
     font-size: 4em;
     vertical-align: middle;
     font-family: 'Eagle Lake', cursive;
 }
 
-#logo {
-    height: 3em;
-    display: inline-block;
-    margin: 1em 0.5em 1em 5em;
-    vertical-align: middle;
+.login-header {
+    background-color: #a70e0e;
+    position: initial;
+    margin-bottom: 0;
+    height: auto;
 }
 
-#title {
-    display: inline-block;
-    font-size: 2em;
-    vertical-align: middle;
-    font-family: 'Eagle Lake', cursive;
-}
-
-#home-link, #home-link:hover {
-    text-decoration: none;
-}
-
-#form {
+.form {
     border: 0.1em solid #a70e0e;
     border-radius: 1em;
     margin: auto;
@@ -184,62 +148,43 @@ textarea {
     line-height: 2em;
 }
 
-#button {
-    background-color: #a70e0e;
-    border: 0.1em solid #a70e0e;
-    border-radius: 10em;
-    text-align: center;
-    font-family: 'Eagle Lake', cursive;
-    padding: 0.5em 1em;
-    display: inline-block;
-    margin: 0.4em auto;
-}
-
-#button:hover {
-    background-color: #e3dcc0;
-    border: 0.1em solid #a70e0e;
-    font-weight: 900;
-    cursor: pointer;
-}
-
-#button-wrapper {
+.button-wrapper {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-content: center;
 }
+/********************************/
 
-#login:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-
-#ham {
-    width: 2em;
-    height: 0.2em;
-    background-color: black;
-    margin: 6px 0;
-}
-
-#ham_menu {
+/* Header Styles */
+.logo {
+    height: 3em;
     display: inline-block;
-    float: right;
-    margin: 1.8em 1em auto 0;
-    padding: 0;
-    position: relative;
+    margin: 1em 0.5em 1em 5em;
+    vertical-align: middle;
 }
 
-#search {
+.title {
+    display: inline-block;
+    font-size: 2em;
+    vertical-align: middle;
+    font-family: 'Eagle Lake', cursive;
+}
+
+.home-link, .home-link:hover {
+    text-decoration: none;
+}
+/********************************/
+
+/* Search Bar Styles */
+.search {
     display: inline-block;
     float: right;
     margin: 0 0.5em;
     padding: 1rem;
 }
 
-#search_field {
+.search_field {
     display: inline-block;
     margin: 1.25rem 0.5rem;
     padding: 0 0.5em;
@@ -247,21 +192,30 @@ textarea {
     background-color: #ffcccc;
 }
 
-#search_icon {
+.search_icon {
     height: 1rem;
     width: 1rem;
-    padding: 0.5rem 0.75em;
+    padding: 0.75rem;
     margin: 0.5rem 0;
     display: inline-block;
-   
 }
 
-#search_icon:hover {
+.search_icon:hover {
     background-color: gray;
     border-radius: 10em;
 }
+/********************************/
 
-#logout {
+/* Drop Down Menu General Styles */
+.ham_menu {
+    display: inline-block;
+    float: right;
+    margin: 1.8em 1em auto 0;
+    padding: 0;
+    position: relative;
+}
+
+.logout {
     width: 100%;
     margin: 0;
     padding: 1em 0;
@@ -270,12 +224,14 @@ textarea {
     font-family: 'Eagle Lake', cursive;
 }
 
-#logout:hover {
-    background-color: #f1f1f1;
+.logout:hover {
+    background-color: #e1e1e1;
     cursor: pointer;
 }
+/********************************/
 
-#aside_button {
+/* Aside Styels */
+.aside_button {
     display: block;
     background-color: black;
     color: white;
@@ -287,11 +243,99 @@ textarea {
     font-size: 1em;
 }
 
-#aside_button:hover {
+.aside_button:hover {
     background-color: #a70e0e;
     cursor: pointer;
 }
+/********************************/
 
+/* Main Section Styles */
+.profile-main {
+    margin-left: 18rem;
+    margin-top: 2.5em;
+}
+
+.profile-main h1 {
+    margin: 1em 1em;
+}
+
+.profile-body {
+    margin: 0;
+    padding: 0;
+}
+/********************************/
+
+/* Button Styles */
+.button {
+    background-color: #a70e0e;
+    border: 0.1em solid #a70e0e;
+    border-radius: 10em;
+    text-align: center;
+    font-family: 'Eagle Lake', cursive;
+    padding: 0.5em 1em;
+    display: inline-block;
+    margin: 0.4em auto;
+}
+
+.button:hover {
+    background-color: #e3dcc0;
+    border: 0.1em solid #a70e0e;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.addChar {
+    margin: 1em 0;
+    padding: 0;
+}
+
+.gameLink {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    font-size: 1em;
+    font-weight: 900;
+    color: #a70e0e;
+}
+
+.gameLink:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+/********************************/
+
+/* Game Page Styles */
+.gamePageTitle {
+    display: inline-block; 
+    float: left;
+    margin-right: 0;
+}
+.gameEditButton {
+    float: left;
+    margin: 2em 0;
+}
+.players {
+    margin: 2em;
+    float: left;
+}
+.players table{
+    width: auto;
+}
+
+.gameDescription {
+    float: left;
+    margin: 2em;
+    max-width: 40%;
+    clear: left;
+}
+
+.gameLog {
+    color: blue;
+    clear: both;
+    margin: 2em;
+}
+
+/********************************/
 
 
 /******************************************************************************/

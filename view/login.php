@@ -1,6 +1,6 @@
 <?php include('view/login_header.php'); ?>
         <main>
-            <div id="form">
+            <div class="form">
                 <h1>Login</h1>
             
                 <!-- Show message for user login -->
@@ -26,14 +26,14 @@
                     <input type="password" name="password" placeholder="Password" required>
                     <br>
                 
-                    <span id="button-wrapper"><input id="button" 
+                    <span class="button-wrapper"><input class="button" 
                         style="width: 45%;" align="right" 
                         type="submit" value="Login"></span>
                 </form>
             
                 <form action="." method="post">
                     <input type="hidden" name="action" value="show_register_form">
-                    <span id="button-wrapper"><input id="button" 
+                    <span class="button-wrapper"><input class="button" 
                         style="width: 45%;" type="submit" value="Register"></span>
                 </form>
             </div>

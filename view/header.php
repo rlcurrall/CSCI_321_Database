@@ -10,25 +10,25 @@
     </head>
     <body>
         <header>
-            <a id="home-link" href="index.php">
-                <img id="logo" src="images/scroll_lock.png" 
+            <a class="home-link" href="index.php">
+                <img class="logo" src="images/scroll_lock.png" 
                      onclick="document.write('<?php $action = "view_characters"; ?>');">
             </a>
-            <h1 id="title">Scroll Lock</h1>
-            <div id="ham_menu">
+            <h1 class="title">Scroll Lock</h1>
+            <div class="ham_menu">
                 <input type="image" src="images/menu-icon.png" id="dropDown" 
                        class="dropbtn" onclick="dropDown()">
                 
                 <div id="myDropdown" class="dropdown-content">
                     <form action="." method="post">
                         <input type="hidden" name="action" value="logout">
-                        <input id="logout" type ="submit" value ="Logout">
+                        <input class="logout" type ="submit" value ="Logout">
                     </form>
                 </div>
             </div>
-            <form id="search" action="." method="post">
+            <form class="search" action="." method="post">
                 <input type="hidden" name="action" value="search">
-                <input type="text" name="keyword" required id="search_field">
-                <input type="image" src="images/search.png" id="search_icon" >
+                <input type="text" name="keyword" required class="search_field">
+                <input type="image" src="images/search.png" class="search_icon" >
             </form>
         </header>

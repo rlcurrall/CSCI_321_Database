@@ -1,7 +1,10 @@
 <?php include('view/login_header.php'); ?>
         <main>
-            <div id="form">
+            <div class="form">
             <h1>Register</h1>
+            <?php if ($message != NULL) { ?>
+            <p style="color: red;"><?php echo $message ?></p>
+            <?php } ?>
             
             <form action="." method="post">
                 <input type="hidden" name="action" value="register">
@@ -22,7 +25,7 @@
                 <input type="password" name="password" placeholder="Password" required>
                 <br>
                 
-                <span id="button-wrapper"><input id="button" type="submit" value="Register"><span>
+                <span class="button-wrapper"><input class="button" type="submit" value="Register"><span>
             </form>
             </div>
         </main>
