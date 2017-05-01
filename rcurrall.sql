@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 30, 2017 at 12:52 AM
+-- Generation Time: May 01, 2017 at 05:03 PM
 -- Server version: 5.7.18-0ubuntu0.16.10.1
 -- PHP Version: 7.0.15-0ubuntu0.16.10.4
 
@@ -45,9 +45,8 @@ INSERT INTO `characters` (`characterID`, `characterName`, `background`, `userID`
 (1, 'Gieve', 'Born in the small town of Egnapon, Geive grew up as the son of an architect but dreamed of being a traveling musician.', 1, 1),
 (2, 'Brix', 'A Drunken dwarf from the Iron Hills, Brix hates goblin\'s and wants to defeat the goblin king.', 3, 1),
 (3, 'Osbourn', 'Osbourn is short.', 4, 1),
-(9, 'Daniel Craig', 'Shoots guns, and gets the ladies. You wish you were him.', 1, NULL),
-(21, 'Tester', 'Making a test character to add to a game to test the remove button', 2, NULL),
-(22, 'Taylor', 'She got da booty', 1, NULL);
+(9, 'Daniel Craig', 'Shoots guns,  gets the ladies. You wish you were him.', 1, 1),
+(21, 'Tester', 'Making a test character to add to a game to test the remove button', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -82,7 +81,7 @@ DROP TABLE IF EXISTS `game_log`;
 CREATE TABLE `game_log` (
   `logID` int(11) NOT NULL,
   `date` date NOT NULL,
-  `descritpion` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `gameID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -90,9 +89,11 @@ CREATE TABLE `game_log` (
 -- Dumping data for table `game_log`
 --
 
-INSERT INTO `game_log` (`logID`, `date`, `descritpion`, `gameID`) VALUES
+INSERT INTO `game_log` (`logID`, `date`, `description`, `gameID`) VALUES
 (1, '2017-04-05', 'Brix was turned into a giant and drank all the whiskey at the local distillery! Gieve learned how to play the flute, and Osbourn bought a new knife.', 1),
-(2, '2017-04-12', 'Brix and Osbourn fought over a pint of beer while Gieve bartered with the merchant for a painting.', 1);
+(2, '2017-04-12', 'Brix and Osbourn fought over a pint of beer while Gieve bartered with the merchant for a painting.', 1),
+(4, '2017-04-19', 'Nothing happened this week, the session was cancelled.\r\n', 1),
+(8, '2017-04-27', 'Edit successful', 1);
 
 -- --------------------------------------------------------
 
@@ -164,17 +165,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `characters`
 --
 ALTER TABLE `characters`
-  MODIFY `characterID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `characterID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `gameID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `gameID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `game_log`
 --
 ALTER TABLE `game_log`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -206,3 +207,8 @@ ALTER TABLE `game_log`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+GRANT SELECT, INSERT, DELETE, UPDATE
+ON rcurrall.*
+TO mgs_user@localhost
+IDENTIFIED BY 'pa55word';
