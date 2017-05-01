@@ -1,7 +1,7 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'].'/final_project/view/header.php');
+include('view/login_header.php');
 ?> 
-<p> ERROR </p>
-<!-- <?php
-include($_SERVER['DOCUMENT_ROOT'].'/final_project/view/footer.php');
-?> -->
+<p class="form"> ERROR </p>
+<?php
+include('view/footer.php');
+?> 

@@ -6,14 +6,8 @@
 <div class="profile-body">
     <aside>
         <h2><?php echo $user['name']; ?></h2>
-        <form action="." method="post">
-            <input type="hidden" name="action" value="view_characters">
-            <input type="submit" class="aside_button" value="Characters">
-        </form>
-        <form action="." method="post">
-            <input type="hidden" name="action" value="view_games">
-            <input type="submit" class="aside_button" value="Games">
-        </form>
+        <a class="aside_button" href="index.php?action=view_characters">Characters</a>
+        <a class="aside_button" href="index.php?action=view_games">Games</a>
     </aside>
     <main class="profile-main">
         <h1>Games</h1>
@@ -36,6 +30,7 @@
             foreach ($games as $game) : ?>
             <tr>
                 <td style='text-align: center;'>
+                    <!--
                     <form action='.' method='post' style='display: inline-block;'>
                         <input type='hidden' name='action'
                                value='game_page'>
@@ -43,6 +38,11 @@
                                value='<?php echo $game['gameID']; ?>'>
                         <input class="gameLink" type="submit" value="<?php echo $game['gameName']; ?>">
                     </form>
+                    -->
+                    <a href="index.php?action=game_page&gameID=<?php echo $game['gameID']; ?>"
+                       class="gameLink">
+                        <?php echo $game['gameName']; ?>
+                    </a>
                 </td>
                 <td><?php echo $game['description']; ?></td>
                 

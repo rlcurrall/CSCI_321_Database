@@ -2,6 +2,7 @@
     include('view/header.php');
     $user = get_user($_SESSION['username']);
     $game = get_game($gameID);
+    $log = get_log($logID);
 ?>
 <div class="profile-body">
     <aside>
@@ -10,27 +11,24 @@
         <a class="aside_button" href="index.php?action=view_games">Games</a>
     </aside>
     <main class="profile-main">
-        <h1>Edit Game</h1>
-        <form action="." method="post" id="game_form">
-            <input type="hidden" name="action" value="edit_game">
+        <h1><?php echo $game['gameName']; ?></h1>
+        <h2>Edit Log Entry</h2>
+        <form action="." method="post" id="log_form">
+            <input type="hidden" name="action" value="edit_log">
             <input type="hidden" name="game_id" value="<?php echo $gameID; ?>">
+            <input type="hidden" name="log_id" value="<?php echo $logID ?>">
             
-            <label>Name:</label>
-            <input type="text" name="name" value="<?php echo $game['gameName']; ?>">
+            <label>Date:</label>
+            <input type='date' name='date' value="<?php echo $log['date']; ?>">
             <br>
             <br>
             
-            <label>Background:</label>
-            <textarea 
-                name="description" 
-                form="game_form" 
-                rows="4" 
-                cols="80"><?php echo $game['description']; ?></textarea>
+            <label>Description:</label>
+            <textarea name="description" form="log_form" rows="4" cols="80"><?php echo $log['description']; ?></textarea>
             <br>
             
             <label>&nbsp;</label>
-            <input type="hidden" name='page' value ='<?php echo $gamePage; ?>'>
-            <input class="button" type="submit" value="Edit Game">
+            <input class="button" type="submit" value="Edit Log Entry">
         </form>
     </main>
 </div>

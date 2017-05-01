@@ -12,7 +12,7 @@
         $db = new PDO($dsn, $usernameDB, $passwordDB);
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
-        include( $_SERVER['DOCUMENT_ROOT'].'/final_project/errors/database_error.php');
+        include( 'errors/database_error.php');
         
         exit();
     }

@@ -110,7 +110,7 @@ function get_character($characterID)
     global $db;
     
     $query = 'SELECT characters.characterID, characters.characterName, 
-        characters.background, games.gameName, games.gameID
+        characters.background, games.gameName, games.gameID, characters.userID
               FROM characters
               LEFT JOIN games
               ON characters.gameID = games.gameID
@@ -345,6 +345,89 @@ function join_game($gameID, $characterID)
     $statement->bindValue(':gameID', $gameID);
     $statement->bindValue(':characterID', $characterID);
     $statement->execute();
+}
+
+function leave_game($characterID)
+{
+    global $db; 
+    $query = 'UPDATE characters
+                SET gameID = NULL
+                WHERE characterID = :characterID';
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':characterID', $characterID);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function get_logs($gameID) {
+    global $db;
+    $query = "SELECT * 
+                FROM game_log
+                WHERE gameID = :gameID";
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':gameID', $gameID);
+    $statement->execute();
+    $logs = $statement->fetchAll();
+    $statement->closeCursor();
+    return $logs;
+}
+
+function get_log($logID) {
+    global $db;
+    $query = "SELECT *
+                FROM game_log
+                WHERE logID = :logID";
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':logID', $logID);
+    $statement->execute();
+    $log = $statement->fetch();
+    $statement->closeCursor();
+    return $log;
+}
+
+function add_log($gameID, $date, $description) {
+    global $db;
+    $query = "INSERT INTO game_log
+                (date, description, gameID)
+                VALUES
+                (:date, :description, :gameID)";
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':gameID', $gameID);
+    $statement->bindValue(':date', $date);
+    $statement->bindValue(':description', $description);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function delete_log($logID) {
+    global $db;
+    $query = "DELETE FROM game_log
+                WHERE logID = :logID";
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':logID', $logID);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function edit_log($logID, $date, $description) {
+    global $db;
+    $query = "UPDATE `game_log` 
+                    SET 
+                        `date` = :date,
+                        `description` = :description
+                    WHERE logID = :logID";
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':date', $date);
+    $statement->bindValue(':description', $description);
+    $statement->bindValue(':logID', $logID);
+    $statement->execute();
+    $statement->closeCursor();
 }
 
 ?>

@@ -6,15 +6,8 @@
 <div class="profile-body">
     <aside>
         <h2><?php echo $user['name']; ?></h2>
-        
-        <form action="." method="post">
-            <input type="hidden" name="action" value="view_characters">
-            <input type="submit" class="aside_button" value="Characters">
-        </form>
-        <form action="." method="post">
-            <input type="hidden" name="action" value="view_games">
-            <input type="submit" class="aside_button" value="Games">
-        </form>
+        <a class="aside_button" href="index.php?action=view_characters">Characters</a>
+        <a class="aside_button" href="index.php?action=view_games">Games</a>
     </aside>
     <main class="profile-main">
         <h1>Edit Character</h1>
@@ -32,6 +25,7 @@
             <br>
             
             <label>&nbsp;</label>
+            <input type="hidden" name='page' value ='<?php echo $characterPage; ?>'>
             <input class="button" type="submit" value="Edit Character">
         </form>
     </main>

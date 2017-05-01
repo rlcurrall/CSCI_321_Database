@@ -237,10 +237,12 @@ textarea {
     color: white;
     font-family: 'Eagle Lake', cursive;
     width: 100%;
-    margin: 0.5em 0;
+    margin: 0.5em auto;
     padding: 0;
     border: none;
     font-size: 1em;
+    text-decoration: none;
+    text-align: center;
 }
 
 .aside_button:hover {
@@ -262,6 +264,11 @@ textarea {
 .profile-body {
     margin: 0;
     padding: 0;
+}
+
+.profile-main h2 {
+    margin: 2em;
+    margin-top: 0;
 }
 /********************************/
 
@@ -296,6 +303,7 @@ textarea {
     font-size: 1em;
     font-weight: 900;
     color: #a70e0e;
+    text-decoration: none;
 }
 
 .gameLink:hover {
@@ -324,13 +332,13 @@ textarea {
 
 .gameDescription {
     float: left;
-    margin: 2em;
-    max-width: 40%;
+    margin: 0 2em;
+    max-width: 50em;
     clear: left;
 }
 
 .gameLog {
-    color: blue;
+    float: left;
     clear: both;
     margin: 2em;
 }
