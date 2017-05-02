@@ -20,15 +20,21 @@
                        class="dropbtn" onclick="dropDown()">
                 
                 <div id="myDropdown" class="dropdown-content">
+                    <p style="margin: 0; padding: 0; width: 8em; text-align: center; font-size: 1em;" class="logout"><a href="index.php?action=profile" class="logout">Profile</a></p>
                     <form action="." method="post">
                         <input type="hidden" name="action" value="logout">
-                        <input class="logout" type ="submit" value ="Logout">
+                        <input style="box-shadow: none; border: none; font-size: 1em;" class="logout" type ="submit" value ="Logout">
                     </form>
                 </div>
             </div>
+            <!--
+            
+            *** could not implement in time ***
+            
             <form class="search" action="." method="post">
                 <input type="hidden" name="action" value="search">
                 <input type="text" name="keyword" required class="search_field">
                 <input type="image" src="images/search.png" class="search_icon" >
             </form>
+            -->
         </header>

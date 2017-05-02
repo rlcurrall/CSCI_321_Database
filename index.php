@@ -239,6 +239,20 @@ switch($action)
         edit_log($logID, $date, $description);
         header('Location: index.php?action=game_page&gameID='.$gameID);
         break;
+    case 'profile':
+        include('view/profile.php');
+        break;
+    case 'edit_user_form' :
+        include('view/edit_user_form.php');
+        break;
+    case 'edit_user' :
+        $userID = filter_input(INPUT_POST, 'user_id');
+        $name = filter_input(INPUT_POST, 'name');
+        $email = filter_input(INPUT_POST, 'email');
+        $password = filter_input(INPUT_POST, 'password');
+        edit_user($userID, $name, $email, $password);
+        header('Location: index.php?action=profile');
+        break;
     
     // SEARCH ACTIONS
     case 'search' :

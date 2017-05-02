@@ -224,10 +224,6 @@ textarea {
     font-family: 'Eagle Lake', cursive;
 }
 
-.logout:hover {
-    background-color: #e1e1e1;
-    cursor: pointer;
-}
 /********************************/
 
 /* Aside Styels */
@@ -333,7 +329,7 @@ textarea {
 .gameDescription {
     float: left;
     margin: 0 2em;
-    max-width: 50em;
+    max-width: 30em;
     clear: left;
 }
 
@@ -393,6 +389,10 @@ textarea {
 .show {display: block;}
 
 
+.logout:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
 /******************************************************************************/
 /*                             Responsive Styles                              */
 /******************************************************************************/

@@ -7,6 +7,7 @@
 -- Server version: 5.7.18-0ubuntu0.16.10.1
 -- PHP Version: 7.0.15-0ubuntu0.16.10.4
 
+SET FOREIGN_KEY_CHECKS = 0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -121,6 +122,7 @@ INSERT INTO `users` (`userID`, `username`, `email`, `password`, `name`) VALUES
 (4, 'cgriffin', 'cgriffin@email.uscb.edu', 'cgriffin', 'Anonymous'),
 (5, 'test', 'test@test.com', 'test', 'test user');
 
+SET FOREIGN_KEY_CHECKS = 1;
 --
 -- Indexes for dumped tables
 --
@@ -189,20 +191,20 @@ ALTER TABLE `users`
 -- Constraints for table `characters`
 --
 ALTER TABLE `characters`
-  ADD CONSTRAINT `fk_characters_game1` FOREIGN KEY (`gameID`) REFERENCES `games` (`gameID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_characters_users1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_characters_game1` FOREIGN KEY (`gameID`) REFERENCES `games` (`gameID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_characters_users1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `games`
 --
 ALTER TABLE `games`
-  ADD CONSTRAINT `fk_users_game1` FOREIGN KEY (`adminID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_users_game1` FOREIGN KEY (`adminID`) REFERENCES `users` (`userID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `game_log`
 --
 ALTER TABLE `game_log`
-  ADD CONSTRAINT `fk_gameLog_game1` FOREIGN KEY (`gameID`) REFERENCES `games` (`gameID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_gameLog_game1` FOREIGN KEY (`gameID`) REFERENCES `games` (`gameID`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

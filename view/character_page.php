@@ -64,29 +64,6 @@
             <h3>Background</h3>
             <p><?php echo $character['background']; ?></p>
         </div>
-        <div class="gameLog">
-            <p>The answer is: <?php
-            $testname = 'hello';
-            $test = is_username_free($testname); 
-            echo $test; ?></p>
-            <p>
-                <?php 
-                    $date = "2010-03-21";
-                    echo $date; ?>
-            </p>
-            <p>
-                    <?php
-                    $newDate = date("d/m/y", strtotime($date));
-                    echo $newDate;
-                ?>
-            </p>
-            <p>
-                <?php
-                $otherDate = date("d-m-y", strtotime($newDate));
-                echo $otherDate;
-                ?>
-            </p>
-        </div>
     </main>
 </div>
 

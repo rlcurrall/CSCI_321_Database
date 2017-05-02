@@ -83,6 +83,22 @@ function search_users($keyword)
     return $users;
 }
 
+function edit_user($userID, $name, $email, $password) {
+    global $db;
+    $query = 'UPDATE users
+                SET name = :name,
+                    email = :email,
+                    password = :password
+                WHERE userID = :userID';
+    
+    $statement = $db->prepare($query);
+    $statement->bindValue(':userID', $userID);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':password', $password);
+    $statement->execute();
+    $statement->closeCursor();
+}
 
 /////////////////////////// CHARACTER FUNCTIONS ///////////////////////////
 
