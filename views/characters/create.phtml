@@ -1,0 +1,61 @@
+<?php $this->partial('navigation', ['user' => $user]) ?>
+
+<form class="max-w-lg mx-auto pt-10 pb-12 px-4 lg:pb-16 space-y-6" action="/characters" method="POST">
+    <div>
+        <h1 class="text-lg leading-6 font-medium text-gray-900">
+            Character Information
+        </h1>
+        <p class="mt-1 text-sm text-gray-500">
+            Let’s get started by filling in the information below to create your new character.
+        </p>
+    </div>
+
+    <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">
+            Character Name
+        </label>
+        <div class="mt-1">
+            <input type="text" name="name" id="character_name" class="px-2 py-1 block w-full shadow-sm  focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm border border-gray-300 rounded-md">
+        </div>
+    </div>
+
+    <div>
+        <label for="description" class="block text-sm font-medium text-gray-700">
+            Description
+        </label>
+        <div class="mt-1">
+            <textarea id="description" name="description" rows="3" class="px-2 py-1 block w-full shadow-sm  focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm border border-gray-300 rounded-md"></textarea>
+        </div>
+    </div>
+
+    <!-- <div class="space-y-2">
+        <div class="space-y-1">
+            <label for="add_game" class="block text-sm font-medium text-gray-700">
+                Join Game
+            </label>
+            <p id="add_game_helper" class="sr-only">Search by name</p>
+            <div class="flex items-center">
+                <div class="flex-grow">
+                    <input type="text" name="add_game" id="add_game" class="px-2 py-1 block w-full shadow-sm  focus:outline-none focus:ring-red-500 focus:border-red-500 focus:z-10 sm:text-sm border border-gray-300 rounded-md" placeholder="Game Name" aria-describedby="add_game_helper">
+                </div>
+                <span class="ml-3">
+                    <button type="button" class="bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        <svg class="-ml-2 mr-1 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        <span>Join</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="flex justify-end">
+        <button onclick="history.back()" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Cancel
+            </a>
+            <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Create this character
+            </button>
+    </div>
+</form>

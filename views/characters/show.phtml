@@ -1,0 +1,66 @@
+<?php $this->partial('navigation', ['user' => $user]) ?>
+
+<div class="container mx-auto pt-10 pb-12 px-4 lg:pb-16 space-y-6">
+    <div class="flex justify-between">
+        <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Character Information
+            </h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                Character details and background.
+            </p>
+        </div>
+
+        <?php if ($character->getUser()->getId() == $user->getId()) { ?>
+            <div class="flex items-center space-x-2">
+                <a href="<?php echo "/characters/{$character->getId()}/edit" ?>" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    Edit
+                </a>
+
+                <form action="<?php echo "/characters/{$character->getId()}" ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this character?')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        <?php } ?>
+    </div>
+
+    <div class="mt-5 border-t border-gray-200">
+        <dl class="sm:divide-y sm:divide-gray-200">
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-medium text-gray-500">
+                    Character name
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <?php echo $character->getName() ?>
+                </dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-medium text-gray-500">
+                    Current Game
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <?php if ($character->getGame()) { ?>
+                        <a class="text-red-600 hover:text-red-900" href="<?php echo "/games/{$character->getGame()->getId()}" ?>">
+                            <?php echo $character->getGame()->getName() ?>
+                        </a>
+                    <?php } else { ?>
+                        <a href="<?php echo "/characters/{$character->getId()}/game/join" ?>" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                            Join a game
+                        </a>
+                    <?php } ?>
+                </dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-medium text-gray-500">
+                    About
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <?php echo $character->getDescription() ?>
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>

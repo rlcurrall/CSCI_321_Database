@@ -1,0 +1,117 @@
+<?php $this->partial('navigation', ['user' => $user]) ?>
+
+<main class="container mx-auto mt-8">
+    <div class="py-5">
+        <div class="flex justify-between">
+            <h1 class="text-lg">Games</h1>
+            <a href="/games/create" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Add
+            </a>
+        </div>
+    </div>
+
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Description
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Owner
+                                </th>
+                                <th scope="col" class="relative px-6 py-3">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($games['data'] as $index => $game) { ?>
+                                <!-- Odd row -->
+                                <?php if ($index % 2 === 1) { ?>
+                                    <tr class="bg-white">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            <a class="text-red-600 hover:text-red-900" href="<?php echo "/games/{$game->getId()}" ?>">
+                                                <?php echo $game->getName() ?>
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <p class="w-80 truncate" title="<?php echo $game->getDescription() ?>">
+                                                <?php echo $game->getDescription() ?>
+                                            </p>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <?php echo $game->getOwner()->getFullName() ?>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <form action="<?php echo "/characters/{$character->getId()}/game" ?>" method="POST">
+                                                <input type="hidden" name="gameId" value="<?php echo $game->getId(); ?>">
+                                                <input type="submit" class="text-red-600 hover:text-red-900 bg-transparent" value="Join">
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                <?php } else { ?>
+                                    <!-- Even row -->
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            <a class="text-red-600 hover:text-red-900" href=" <?php echo "/games/{$game->getId()}" ?>">
+                                                <?php echo $game->getName() ?>
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <p class="w-80 truncate" title="<?php echo $game->getDescription() ?>">
+                                                <?php echo $game->getDescription() ?>
+                                            </p>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <?php echo $game->getOwner()->getFullName() ?>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <form action="<?php echo "/characters/{$character->getId()}/game" ?>" method="POST">
+                                                <input type="hidden" name="gameId" value="<?php echo $game->getId(); ?>">
+                                                <input type="submit" class="text-red-600 hover:text-red-900 bg-transparent" value="Join">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <nav class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" aria-label="Pagination">
+                        <div class="hidden sm:block">
+                            <p class="text-sm text-gray-700">
+                                Showing
+                                <span class="font-medium"><?php echo $games['from']  ?></span>
+                                to
+                                <span class="font-medium"><?php echo $games['to'] <= $games['total'] ? $games['to'] : $games['total'] ?></span>
+                                of
+                                <span class="font-medium"><?php echo $games['total'] ?></span>
+                                results
+                            </p>
+                        </div>
+                        <div class="flex-1 flex justify-between sm:justify-end">
+                            <?php if ($games['page'] !== 1) { ?>
+                                <a href="/characters/<?php echo $character->getId() ?>/game/join?page=<?php echo $games['page'] - 1 ?>" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Previous
+                                </a>
+                            <?php } ?>
+
+                            <?php if ($games['page'] < $games['numPages']) { ?>
+                                <a href="/characters/<?php echo $character->getId() ?>/game/join?page=<?php echo $games['page'] + 1 ?>" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Next
+                                </a>
+                            <?php } ?>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
