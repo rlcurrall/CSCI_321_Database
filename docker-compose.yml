@@ -1,0 +1,67 @@
+version: "3.4"
+
+services:
+  php:
+    build:
+      context: .
+      target: app_php
+    depends_on:
+      - database
+    restart: unless-stopped
+    volumes:
+      - sl_php_socket:/var/run/php
+    environment:
+      DB_HOST: database
+      DB_NAME: scroll_lock
+      DB_USERNAME: root
+      DB_PASSWORD: '12345'
+      PHP_FPM_CLEAR_ENV: 'no'
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+
+  caddy:
+    build:
+      context: .
+      target: app_caddy
+    depends_on:
+      - php
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
+    restart: unless-stopped
+    volumes:
+      - sl_php_socket:/var/run/php
+      - sl_caddy_data:/data
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./public:/srv/app/public:ro
+    ports:
+      # HTTP
+      - target: 80
+        published: 80
+        protocol: tcp
+      # HTTPS
+      - target: 443
+        published: 443
+        protocol: tcp
+      # HTTP/3
+      - target: 443
+        published: 443
+        protocol: udp
+
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: scroll_lock
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: password
+    volumes:
+      - sl_db_data:/var/lib/mysql:rw
+
+volumes:
+  sl_php_socket:
+  sl_db_data:
+  sl_caddy_data:
+  sl_caddy_config:

@@ -1,0 +1,41 @@
+<?php $this->partial('navigation', ['user' => $user]) ?>
+
+<main class="container mx-auto space-y-8 px-8 sm:px-0">
+    <div class="space-y-6 sm:pt-10 sm:space-y-5">
+        <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Personal Information
+            </h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                Use a permanent address where you can receive mail.
+            </p>
+        </div>
+        <div class="space-y-6 sm:space-y-5">
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="full_name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    Full name
+                </label>
+                <div class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <?php echo $user->getFullName() ?>
+                </div>
+            </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    Email address
+                </label>
+                <div class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <?php echo $user->getEmail() ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-5">
+        <div class="flex justify-end">
+            <a href="/profile/edit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Edit
+            </a>
+        </div>
+    </div>
+</main>

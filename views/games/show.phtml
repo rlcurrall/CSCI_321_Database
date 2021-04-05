@@ -1,0 +1,208 @@
+<?php $this->partial('navigation', ['user' => $user]) ?>
+
+<main class="container mx-auto pt-10 pb-12 px-4 lg:pb-16 space-y-6" x-data="{ tab: localStorage.getItem('game_tab') || 'details' }">
+    <div class="flex justify-between">
+        <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Game Information
+            </h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                Game details, players, and logs.
+            </p>
+        </div>
+
+
+        <?php if ($game->getOwner()->getId() == $user->getId()) { ?>
+            <div class="flex space-x-2 items-center">
+                <a href="<?php echo "/games/{$game->getId()}/edit" ?>" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    Edit
+                </a>
+                <form action="<?php echo "/games/{$game->getId()}" ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this game?')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        <?php } ?>
+    </div>
+
+    <div>
+        <div class="sm:hidden">
+            <label for="tabs" class="sr-only">Select a tab</label>
+            <select id="tabs" name="tabs" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md">
+                <option selected>Details</option>
+
+                <option>Players</option>
+
+                <option>Logs</option>
+            </select>
+        </div>
+        <div class="hidden sm:block">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <a @click="localStorage.setItem('game_tab', 'details'); tab = 'details'" :class="{ 'border-red-500 text-red-600': tab === 'details', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'details' }" class="cursor-pointer whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        Details
+                    </a>
+
+                    <a @click="localStorage.setItem('game_tab', 'players'); tab = 'players'" :class="{ 'border-red-500 text-red-600': tab === 'players', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'details' }" class="cursor-pointer whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        Players
+                    </a>
+
+                    <a @click="localStorage.setItem('game_tab', 'logs'); tab = 'logs'" :class="{ 'border-red-500 text-red-600': tab === 'logs', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'details' }" class="cursor-pointer whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        Logs
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="tab === 'details'">
+        <div class="mt-5 border-gray-200">
+            <dl class="sm:divide-y sm:divide-gray-200">
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Game name
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <?php echo $game->getName() ?>
+                    </dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Dungeon master
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <?php echo $game->getOwner()->getFullName() ?>
+                    </dd>
+                </div>
+                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+                    <dt class="text-sm font-medium text-gray-500">
+                        About
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <?php echo $game->getDescription() ?>
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <div x-show="tab === 'players'">
+        <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <?php foreach ($players['data'] as $player) { ?>
+                <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                    <div class="w-full flex items-center justify-between p-6 space-x-6">
+                        <div class="flex-1 truncate">
+                            <div class="flex items-center space-x-3">
+                                <h3 class="text-gray-900 text-sm font-medium truncate">
+                                    <?php echo $player->getName() ?>
+                                </h3>
+                                <!-- <span class="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">Admin</span> -->
+                            </div>
+                            <p class="mt-1 text-gray-500 text-sm truncate">
+                                <?php echo $player->getUser()->getFullName() ?>
+                            </p>
+                        </div>
+                        <!-- <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=L0hp6wRpa5&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt=""> -->
+                    </div>
+                    <div>
+                        <div class="-mt-px flex divide-x divide-gray-200">
+                            <div class="w-0 flex-1 flex">
+                                <a href="<?php echo "/characters/{$player->getId()}" ?>" class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                    View
+                                </a>
+                            </div>
+                            <?php if ($player->getUser()->getId() === $user->getId() || $game->getOwner()->getId() === $user->getId()) { ?>
+                                <form method="POST" action="<?php echo "/characters/{$player->getId()}/game" ?>" class="-ml-px w-0 flex-1 flex" onsubmit="return confirm('Are you sure you want to remove this player?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class=" text-white relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm font-medium border border-transparent rounded-br-lg bg-red-600 hover:bg-red-700">
+                                        Remove
+                                    </button>
+                                </form>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+
+    <div x-show="tab === 'logs'">
+        <?php if ($game->getOwner()->getId() == $user->getId()) { ?>
+            <div class="flex justify-start mb-8">
+                <a href="<?php echo "/games/{$game->getId()}/log/create" ?>" class="inline-flex items-center p-2 pr-4 border border-transparent rounded-full shadow-sm text-white text-sm bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                    Add
+                </a>
+            </div>
+        <?php } ?>
+
+        <div class="flow-root">
+            <ul class="-mb-8">
+                <?php foreach ($logs['data'] as $index => $log) { ?>
+                    <li>
+                        <div class="relative pb-8">
+                            <?php if ($index + 1 < count($logs['data'])) { ?>
+                                <span class="absolute top-5 left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                            <?php } ?>
+                            <div class="relative flex items-start space-x-3">
+                                <div class="relative">
+                                    <img class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-yellow-50" src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="">
+
+                                    <span class="absolute -bottom-0.5 -right-1 bg-yellow-50 rounded-tl px-0.5 py-px">
+                                        <!-- Heroicon name: solid/chat-alt -->
+                                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <div class="text-sm">
+                                                <a href="#" class="font-medium text-gray-900">
+                                                    Summary
+                                                </a>
+                                            </div>
+                                            <p class="mt-0.5 text-sm text-gray-500">
+                                                <?php echo $log->getDate()->format('M d, Y') ?>
+                                            </p>
+                                        </div>
+                                        <?php if ($game->getOwner()->getId() == $user->getId()) { ?>
+                                            <div class="flex space-x-2">
+                                                <a href="<?php echo "/game-logs/{$log->getId()}/edit" ?>">
+                                                    <span class="sr-only">Edit</span>
+                                                    <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                                    </svg>
+                                                </a>
+                                                <form action="<?php echo "/game-logs/{$log->getId()}" ?>" method="POST" onsubmit="return confirm('Are you sure you want to delete this log?')">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button type="submit">
+                                                        <span class="sr-only">Delete</span>
+                                                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="mt-2 text-sm text-gray-700">
+                                        <p>
+                                            <?php echo $log->getDescription() ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>
+        </div>
+    </div>
+</main>

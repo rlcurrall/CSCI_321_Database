@@ -1,0 +1,17 @@
+{
+    "name": "rlcurrall/scroll-lock",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Robb Currall",
+            "email": "rlcurrall@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ScrollLock\\": "src/"
+        },
+        "files": ["src/helpers.php"]
+    }
+}
